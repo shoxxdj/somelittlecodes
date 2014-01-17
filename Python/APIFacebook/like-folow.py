@@ -1,3 +1,12 @@
+#!/usr/bin/python
+#######################
+#This code is free !  #
+#www.shoxx-website.com#
+#######################
+# Requirements        #
+# Python-requests     #
+# Python-json         #
+#######################
 import requests
 import json
 
