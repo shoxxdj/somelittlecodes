@@ -3,7 +3,7 @@
 
 import string
 
-chaine=''
+chaine='ELHQ MRXH OH PRW GH SDVVH HVW FHVDUXVFRGXV'
 
 def make_rot_n(n):
  lc = string.lowercase
