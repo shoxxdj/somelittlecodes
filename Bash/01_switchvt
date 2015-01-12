@@ -1,0 +1,12 @@
+#!/bin/sh
+# this program helps on Ubuntu 14.04 who doesn t have the susped hibernate function working properly
+# Switch to a VC before suspending and back after resume
+
+case "$1" in
+        resume|thaw)
+            chvt 7
+        ;;
+        suspend|hibernate)
+            chvt 1
+        ;;
+esac
