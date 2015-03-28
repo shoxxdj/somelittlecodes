@@ -12,7 +12,7 @@ After you just have to translate all your letter to rubik's sequences !
 
 
 ###How does it works :
-
+```
 usage: cubocrypto.py [-h] [--tocube] [--input INPUT] [--totext] [--verbose]
 
 optional arguments:
@@ -22,7 +22,7 @@ optional arguments:
                         Your value to transform
   --totext, -p          Cube text -> Plain Text
   --verbose, --v, -v    Verbose mode
-
+```
 ###What's comming next ? 
 -Improve this code.
 -Add more combinaison for one letter. 
