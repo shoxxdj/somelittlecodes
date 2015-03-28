@@ -5,8 +5,8 @@
 This code is a dictionary that allow you to translate your human based syntax to a rubiks cube one. 
 We only need 2 things : 
 
--An alphabet : I choose [this one] (http://www.ericharshbarger.org/logolog/rubik_font.gif)  because it's I think the best.
--Know the rubiks movment notation : http://grrroux.free.fr/method/notation.gif
+- An alphabet : I choose [this one] (http://www.ericharshbarger.org/logolog/rubik_font.gif)  because it's I think the best.
+- Know the rubiks movment notation : http://grrroux.free.fr/method/notation.gif
 
 After you just have to translate all your letter to rubik's sequences ! 
 
@@ -24,7 +24,7 @@ optional arguments:
   --verbose, --v, -v    Verbose mode
 ```
 ###What's comming next ? 
--Improve this code.
--Add more combinaison for one letter. 
--Random generate the combinasion choosen for a letter. 
--Take a look at the Revenge Cube and Professor Cube. 
+- Improve this code.
+- Add more combinaison for one letter. 
+- Random generate the combinasion choosen for a letter. 
+- Take a look at the Revenge Cube and Professor Cube. 
